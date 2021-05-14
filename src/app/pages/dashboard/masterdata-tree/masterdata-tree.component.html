@@ -1,0 +1,141 @@
+<div class="container-fluid">
+  <app-page-title
+    title="Client management"
+    [breadcrumbItems]="breadCrumbItems"
+  ></app-page-title>
+  <div class="row" *ngIf="masterData">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-md-2">
+            <div class="col-sm-12 col-md-6"></div>
+            <!-- Search -->
+            <div class="col-sm-12 col-md-6">
+              <div
+                id="tickets-table_filter"
+                class="dataTables_filter text-md-end"
+              >
+                <label class="d-inline-flex align-items-center"
+                  >Search:
+                  <input
+                    type="text"
+                    name="searchTerm"
+                    class="form-control form-control-sm ms-2"
+                    aria-controls="tickets-table"
+                    [(ngModel)]="searchTerm"
+                /></label>
+              </div>
+            </div>
+            <!-- End search -->
+          </div>
+          <!-- Table -->
+          <div class="table-responsive">
+            <table
+              class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline"
+            >
+              <thead>
+                <tr>
+                  <th sortable="companyName" >
+                    Company name
+                  </th>
+                  <th sortable="address" >Address</th>
+                  <th sortable="postcode" >Postcode</th>
+                  <th sortable="city" >City</th>
+                 
+               
+                </tr>
+              </thead>
+              <tbody *ngFor="let master of masterData">
+                <tr>
+                  <td>
+                    <ngb-highlight
+                      [result]="master.name"
+                      [term]="searchTerm"
+                    ></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight
+                      [result]="client.description"
+                      [term]="searchTerm"
+                    ></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight
+                      [result]="client.oid"
+                      [term]="postcode"
+                    ></ngb-highlight>
+                  </td>
+                 
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- End table -->
+          <div
+            class="row justify-content-md-between align-items-md-center mt-2"
+          >
+            <div class="col-sm-12 col-md-5">
+              <div
+                class="dataTables_info mb-2"
+                id="tickets-table_info"
+                role="status"
+                aria-live="polite"
+              ><label class="d-inline-flex ">
+                Showing {{ ((page > 0 ? page : 1) - 1) * pageSize + 1 }} to
+                {{
+                  ((page > 0 ? page : 0) - 1) * pageSize + clientData?.length
+                }}
+                of
+                {{ totalRecords }}
+                entries</label>
+              </div>
+            </div>
+            <!-- Pagination -->
+            <div class="col-sm-12 col-md-5 ">
+              <div
+                class="dataTables_length float-md-end"
+                id="clients-table_length"
+                *ngIf="totalRecords > 10"
+              >
+                <label class="d-inline-flex align-items-center ">
+                  Show
+                  <select
+                    name="clients-table_length"
+                    aria-controls="clients-table"
+                    name="pageSize"
+                    [(ngModel)]="pageSize"
+                    class="form-control form-control-sm mx-2"
+                    (change)="onPageSizeChange()"
+                  >
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="25" *ngIf="totalRecords > 25">25</option>
+                    <option [ngValue]="50" *ngIf="totalRecords > 50">
+                      50
+                    </option>
+                    <option [ngValue]="100" *ngIf="totalRecords > 100">
+                      100
+                    </option>
+                  </select>
+                  entries</label
+                >
+              </div>
+              <div class="text-md-right float-md-end pagination-rounded">
+                <ngb-pagination
+                  [(collectionSize)]="totalRecords"
+                  [(page)]="page"
+                  [(pageSize)]="pageSize"
+                  (pageChange)="onPageChange()"
+                  [boundaryLinks]="true"
+                  [maxSize]="5"
+                  [rotate]="true"
+                >
+                </ngb-pagination>
+              </div>
+            </div>
+            <!-- End Pagination -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

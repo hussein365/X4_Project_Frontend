@@ -1,0 +1,391 @@
+<div class="container-fluid">
+  <app-page-title
+    title="Client management"
+    [breadcrumbItems]="breadCrumbItems"
+  ></app-page-title>
+  <div class="row" *ngIf="clientData">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-md-2">
+            <div class="col-sm-12 col-md-6"></div>
+            <!-- Search -->
+            <div class="col-sm-12 col-md-6">
+              <div
+                id="tickets-table_filter"
+                class="dataTables_filter text-md-end"
+              >
+                <label class="d-inline-flex align-items-center"
+                  >Search:
+                  <input
+                    type="text"
+                    name="searchTerm"
+                    class="form-control form-control-sm ms-2"
+                    aria-controls="tickets-table"
+                    [(ngModel)]="searchTerm"
+                /></label>
+              </div>
+            </div>
+            <!-- End search -->
+          </div>
+          <!-- Table -->
+          <div class="table-responsive">
+            <table
+              class="table table-bordered dt-responsive nowrap datatables no-footer dtr-inline"
+            >
+              <thead>
+                <tr>
+                  <th sortable="companyName" >
+                    Company name
+                  </th>
+                  <th sortable="address" >Address</th>
+                  <th sortable="postcode" >Postcode</th>
+                  <th sortable="city" >City</th>
+                  <th sortable="legalForm" >
+                    Legal form
+                  </th>
+                  <th sortable="capital" >Capital</th>
+                  <th sortable="rcc" >RCC</th>
+                  <th sortable="siren" >Siren</th>
+                  <th sortable="vatNumber" >
+                    VAT number
+                  </th>
+                  <th sortable="foreign" >Foreign</th>
+                  <th sortable="currency" >Currency</th>
+                  <th>
+                    <button
+                      type="button"
+                      class="btn btn-light"
+                      (click)="openModal(clientModal, 'Create', {})"
+                    >
+                      <i class="mdi mdi-plus"></i>
+                    </button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let client of clientData">
+                <tr>
+                  <td>
+                    <ngb-highlight
+                      [result]="client.companyName"
+                      [term]="searchTerm"
+                    ></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight
+                      [result]="client.address"
+                      [term]="searchTerm"
+                    ></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight
+                      [result]="client.postcode"
+                      [term]="postcode"
+                    ></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight
+                      [result]="client.city"
+                      [term]="searchTerm"
+                    ></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight
+                      [result]="client.legalForm"
+                      [term]="searchTerm"
+                    ></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight
+                      [result]="client.capital"
+                      [term]="searchTerm"
+                    ></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight
+                      [result]="client.rcc"
+                      [term]="searchTerm"
+                    ></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight
+                      [result]="client.siren"
+                      [term]="searchTerm"
+                    ></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight
+                      [result]="client.vatNumber"
+                      [term]="searchTerm"
+                    ></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight
+                      [result]="client.foreign"
+                      [term]="searchTerm"
+                    ></ngb-highlight>
+                  </td>
+                  <td>
+                    <ngb-highlight
+                      [result]="client.currency"
+                      [term]="searchTerm"
+                    ></ngb-highlight>
+                  </td>
+                  <td>
+                    <div ngbDropdown placement="bottom-left">
+                      <i
+                        class="mdi mdi-dots-vertical dropdown-toggle"
+                        ngbDropdownToggle
+                        data-toggle="dropdown"
+                        aria-expanded="true"
+                      ></i>
+                      <div
+                        class="dropdown-menu dropdown-menu-end"
+                        ngbDropdownMenu
+                      >
+                        <a
+                          class="dropdown-item"
+                          href="javascript: void(0);"
+                          (click)="openModal(clientModal, 'Edit', client)"
+                          ><i class="mdi mdi-account-edit"></i>Edit</a
+                        >
+                        <a
+                          class="dropdown-item"
+                          href="javascript: void(0);"
+                          (click)="deleteClient(client)"
+                          ><i class="mdi mdi-account-edit"></i>Delete</a
+                        >
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- End table -->
+          <div
+            class="row justify-content-md-between align-items-md-center mt-2"
+          >
+            <div class="col-sm-12 col-md-5">
+              <div
+                class="dataTables_info mb-2"
+                id="tickets-table_info"
+                role="status"
+                aria-live="polite"
+              ><label class="d-inline-flex ">
+                Showing {{ ((page > 0 ? page : 1) - 1) * pageSize + 1 }} to
+                {{
+                  ((page > 0 ? page : 0) - 1) * pageSize + clientData?.length
+                }}
+                of
+                {{ totalRecords }}
+                entries</label>
+              </div>
+            </div>
+            <!-- Pagination -->
+            <div class="col-sm-12 col-md-5 ">
+              <div
+                class="dataTables_length float-md-end"
+                id="clients-table_length"
+                *ngIf="totalRecords > 10"
+              >
+                <label class="d-inline-flex align-items-center ">
+                  Show
+                  <select
+                    name="clients-table_length"
+                    aria-controls="clients-table"
+                    name="pageSize"
+                    [(ngModel)]="pageSize"
+                    class="form-control form-control-sm mx-2"
+                    (change)="onPageSizeChange()"
+                  >
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="25" *ngIf="totalRecords > 25">25</option>
+                    <option [ngValue]="50" *ngIf="totalRecords > 50">
+                      50
+                    </option>
+                    <option [ngValue]="100" *ngIf="totalRecords > 100">
+                      100
+                    </option>
+                  </select>
+                  entries</label
+                >
+              </div>
+              <div class="text-md-right float-md-end pagination-rounded">
+                <ngb-pagination
+                  [(collectionSize)]="totalRecords"
+                  [(page)]="page"
+                  [(pageSize)]="pageSize"
+                  (pageChange)="onPageChange()"
+                  [boundaryLinks]="true"
+                  [maxSize]="5"
+                  [rotate]="true"
+                >
+                </ngb-pagination>
+              </div>
+            </div>
+            <!-- End Pagination -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #clientModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title mt-0">{{ mode }} client</h5>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="modal.dismiss('Cross click')"
+      aria-hidden="true"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Company name</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="companyName"
+              type="text"
+              [(ngModel)]="selectedClient.companyName"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Address</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="address"
+              type="text"
+              [(ngModel)]="selectedClient.address"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Postcode</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="postcode"
+              type="text"
+              [(ngModel)]="selectedClient.postcode"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">City</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="city"
+              type="text"
+              [(ngModel)]="selectedClient.city"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Legal form</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="legalForm"
+              type="text"
+              [(ngModel)]="selectedClient.legalForm"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Capital</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="capital"
+              type="number"
+              [(ngModel)]="selectedClient.capital"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">RCC</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="rcc"
+              type="text"
+              [(ngModel)]="selectedClient.rcc"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Siren</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="siren"
+              type="text"
+              [(ngModel)]="selectedClient.siren"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">VAT number</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="vatNumber"
+              type="text"
+              [(ngModel)]="selectedClient.vatNumber"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Foreign</label>
+          <div class="col-md-9">
+            <div class="form-check form-switch form-switch-md mb-3" dir="ltr">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="SwitchCheckSizemd"
+                name="foreign"
+                [(ngModel)]="selectedClient.foreign"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Currency</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="currency"
+              type="text"
+              [(ngModel)]="selectedClient.currency"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="addOrUpdateClient(clientModal)"
+    >
+      Save changes
+    </button>
+  </div>
+</ng-template>
