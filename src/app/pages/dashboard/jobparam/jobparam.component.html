@@ -1,0 +1,368 @@
+<div class="container-fluid">
+    <app-page-title
+      title="Batchjob Parameter"
+      [breadcrumbItems]="breadCrumbItems"
+    ></app-page-title>
+    <div class="row" *ngIf="jobparams">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row mb-md-2">
+              
+             
+  
+            <!-- Table -->
+            <div class="table-responsive">
+              <table
+                class="table table-bordered "
+              >
+                <thead>
+                  <tr>
+                    <th sortable="id" >
+                      ID
+                    </th>
+                    <th sortable="no" >
+                      No
+                    </th>
+
+                    <th sortable="key" >
+                      Key
+                    </th>
+                  
+                    <th sortable="value" >
+                      Value
+                    </th>
+                    <th >
+                      <button
+                        type="button"
+                        class="btn btn-light"
+                        (click)="openModal(jobParamModalCreate, 'Create', selectedJobParam)"
+                      >
+                      <i class="mdi mdi-plus"></i>
+                      </button>
+                
+                    </th>
+                  
+            
+  
+                  </tr>
+                </thead>
+                <tbody *ngFor="let jobparam of jobparams
+                ">
+                  <tr>
+                  
+                    <td>
+                      <ngb-highlight
+                        [result]="jobparam.job_ParamId.id"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                  
+                    <td>
+                      <ngb-highlight
+                        [result]="jobparam.nr"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="jobparam.job_ParamId.key"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="jobparam.value"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <div ngbDropdown placement="bottom-left">
+                        <i
+                          class="mdi mdi-dots-vertical dropdown-toggle"
+                          ngbDropdownToggle
+                          data-toggle="dropdown"
+                          aria-expanded="true"
+                        ></i>
+                        <div
+                          class="dropdown-menu dropdown-menu-end"
+                          ngbDropdownMenu
+                        >
+                          <a
+                            class="dropdown-item"
+                            href="javascript: void(0);"
+                            (click)="openModal(jobParamModal, 'Edit', jobparam)"
+                            ><i class="mdi mdi-account-edit"></i>Edit</a
+                          >
+                          <a
+                            class="dropdown-item"
+                            href="javascript: void(0);"
+                            (click)="deleteJobParam(jobparam.job_ParamId)"
+                            ><i class="mdi mdi-account-edit"></i>Delete</a
+                          >
+                        </div>
+                      </div>
+                    </td>
+                  
+                    
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- End table -->
+            <div
+              class="row justify-content-md-between align-masters-md-center mt-2"
+            >
+              <div class="col-sm-12 col-md-5">
+                <div
+                  class="dataTables_info mb-2"
+                  id="tickets-table_info"
+                  role="status"
+                  aria-live="polite"
+                ><label class="d-inline-flex ">
+                  Showing {{ ((page > 0 ? page : 1) - 1) * pageSize + 1 }} to
+                  {{
+                    ((page > 0 ? page : 0) - 1) * pageSize + jobparams?.length
+                  }}
+                  of
+                  {{ totalRecords }}
+                  entries</label>
+                </div>
+              </div>
+              <!-- Pagination -->
+              <div class="col-sm-12 col-md-9 ">
+                <div
+                  class="dataTables_length float-md-end"
+                  id="clients-table_length"
+                  *ngIf="totalRecords > 10"
+                >
+                  <label class="d-inline-flex align-items-center ">
+                    Show
+                    <select
+                      name="clients-table_length"
+                      aria-controls="clients-table"
+                      name="pageSize"
+                      [(ngModel)]="pageSize"
+                      class="form-control form-control-sm mx-2"
+                      (change)="onPageSizeChange()"
+                    ><option [ngValue]="5">5</option>
+                      <option [ngValue]="10">10</option>
+                      <option [ngValue]="25" *ngIf="totalRecords > 25">25</option>
+                      <option [ngValue]="50" *ngIf="totalRecords > 50">
+                        50
+                      </option>
+                      <option [ngValue]="100" *ngIf="totalRecords > 100">
+                        100
+                      </option>
+                    </select>
+                    entries</label
+                  >
+                </div>
+                <div class="text-md-right float-md-end pagination-rounded">
+                  <ngb-pagination
+                    [(collectionSize)]="totalRecords"
+                    [(page)]="page"
+                    [(pageSize)]="pageSize"
+                    (pageChange)="onPageChange()"
+                    [boundaryLinks]="true"
+                    [maxSize]="5"
+                    [rotate]="true"
+                  >
+                  </ngb-pagination>
+                </div>
+              </div>
+              <!-- End Pagination -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+   
+<ng-template #jobParamModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title mt-0">{{ mode }} Job Parameter</h5>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="modal.dismiss('Cross click')"
+      aria-hidden="true"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">ID *</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="ID"
+              type="text"
+              [(ngModel)]="selectedJobParam.job_ParamId.id" readonly
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label"> No</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="No"
+              type="text"
+              [(ngModel)]="selectedJobParam.nr" 
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Key *</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="Key"
+              type="text"
+              [(ngModel)]="selectedJobParam.job_ParamId.key" readonly
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Value</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="value"
+              type="text"
+              [(ngModel)]="selectedJobParam.value" 
+            />
+          </div>
+        </div>
+        <div *ngIf="mode==='Edit'">
+          <div class="row mb-12">
+            <label class="col-md-3 col-form-label">Alle Felder mit * dürfen nicht geändert werden</label>
+           
+          </div>
+
+        </div>
+        <div *ngIf="mode==='Create'">
+          <div class="row mb-12">
+            <label class="col-md-3 col-form-label">Alle Felder mit * dürfen nicht leer sein</label>
+           
+          </div>
+
+        </div>
+        
+       
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="UpdateJobParam(jobParamModal)"
+    >
+      Save changes
+    </button>
+  </div>
+</ng-template>
+ 
+<ng-template #jobParamModalCreate let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title mt-0">{{ mode }} Job Parameter</h5>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="modal.dismiss('Cross click')"
+      aria-hidden="true"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">ID *</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="ID"
+              type="text"
+              [(ngModel)]="selectedJobParam.job_ParamId.id" readonly
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label"> No</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="No"
+              type="text"
+              [(ngModel)]="selectedJobParam.nr" 
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Key *</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="Key"
+              type="text"
+              [(ngModel)]="selectedJobParam.job_ParamId.key" 
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Value</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="value"
+              type="text"
+              [(ngModel)]="selectedJobParam.value" 
+            />
+          </div>
+        </div>
+        <div *ngIf="mode==='Edit'">
+          <div class="row mb-12">
+            <label class="col-md-3 col-form-label">Alle Felder mit * dürfen nicht geändert werden</label>
+           
+          </div>
+
+        </div>
+        <div *ngIf="mode==='Create'">
+          <div class="row mb-12">
+            <label class="col-md-3 col-form-label">Alle Felder mit * dürfen nicht leer sein</label>
+           
+          </div>
+
+        </div>
+        
+       
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="CreateJobParam(jobParamModalCreate)"
+    >
+      Save changes
+    </button>
+  </div>
+</ng-template>

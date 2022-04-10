@@ -1,1 +1,803 @@
-<p>Archive12</p>
+<div class="container-fluid">
+    <app-page-title
+      title="Archive Management"
+      [breadcrumbItems]="breadCrumbItems"
+    ></app-page-title>
+    <div class="row" *ngIf="masterData">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row mb-md-2">
+              
+              <!-- Search -->
+              <div class="col-sm-12 col-md-12">
+                <div
+                  id="tickets-table_filter"
+                  class="dataTables_filter text-md-left"
+                >
+                <form class="row g-3">
+                  <div class="col-md-3">
+  
+                  <label class="d-inline-flex align-masters-center"
+                    >Liste TA with comma
+                    <input
+                      type="text"
+                      name="searchTerm"
+                      class="form-control form-control-sm ms-2"
+                      aria-controls="tickets-table"
+                      [(ngModel)]="ta"
+                  /></label>
+                  </div>
+                  <div class="col-md-3">
+  
+                  <label class="d-inline-flex "
+                  >Range TA from
+                  <input
+                    type="text"
+                    name="searchTerm"
+                    class="form-control form-control-sm ms-2"
+                    aria-controls="tickets-table"
+                    [(ngModel)]="from"
+                /></label>
+                </div>
+                <div class="col-md-3">
+  
+                <label class="d-inline-flex "
+                >Range TA until
+                <input
+                  type="text"
+                  name="searchTerm"
+                  class="form-control form-control-sm ms-2"
+                  aria-controls="tickets-table"
+                  [(ngModel)]="until"
+              /></label>
+              </div>
+              <div class="col-md-3 ">
+  
+                <button type="button" class="btn btn-info waves-effect waves-light  " (click)="method()">Submit</button>
+                 
+              </div>
+              <div class="col-md-3 ">
+
+                <button type="button" class="btn btn-info waves-effect waves-light  " (click)="openModal(jobModalCreate, 'Create', selectedJob)">Set up Batchjob</button>
+                 </div>
+
+
+
+
+                <div class="col-md-12">
+  
+              <ng-multiselect-dropdown class="multiselect-dropdown"
+              [placeholder]="'select TA_TYP'"
+              [settings]="dropdownSettings"
+              [data]="dropdownList"
+              [(ngModel)]="selectedItems"
+              (onSelect)="onItemSelect($event)"
+              (onSelectAll)="onSelectAll($event)"
+            >
+            </ng-multiselect-dropdown>
+           
+          </div>
+          
+          <div class="col-md-2">
+           
+            <ng-multiselect-dropdown class="multiselect-dropdown"
+            [placeholder]="'Type 0'"
+            [settings]="dropdownType0Settings"
+            [data]="dropdownListType0"
+            [(ngModel)]="selectedItemsType0"
+            [ngModelOptions]="{standalone: true}"
+            (onSelect)="onItemSelectType0($event)"
+            (onSelectAll)="onSelectAllType0($event)"
+          >
+          </ng-multiselect-dropdown>
+          </div>
+  
+          <div class="col-md-2">
+            <ng-multiselect-dropdown class="multiselect-dropdown"
+            [placeholder]="'Type 1'"
+            [settings]="dropdownType1Settings"
+            [data]="dropdownListType1"
+            [(ngModel)]="selectedItemsType1"
+            [ngModelOptions]="{standalone: true}"
+            (onSelect)="onItemSelectType1($event)"
+            (onSelectAll)="onSelectAllType1($event)"
+          >
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="col-md-2">
+            <label class="d-inline-flex "
+                >Name1
+                <input
+                  type="text"
+                  name="searchTerm"
+                  class="form-control form-control-sm ms-2"
+                  aria-controls="tickets-table"
+                  [(ngModel)]="name1"
+                  [ngModelOptions]="{standalone: true}"
+              /></label>
+  
+          </div>
+          <div class="col-md-2">
+            <ng-multiselect-dropdown class="multiselect-dropdown"
+            [placeholder]="'Type 2'"
+            [settings]="dropdownType2Settings"
+            [data]="dropdownListType2"
+            [(ngModel)]="selectedItemsType2"
+            [ngModelOptions]="{standalone: true}"
+            (onSelect)="onItemSelectType2($event)"
+            (onSelectAll)="onSelectAllType2($event)"
+          >
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="col-md-2">
+            <label class="d-inline-flex "
+                >Name2
+                <input
+                  type="text"
+                  name="searchTerm"
+                  class="form-control form-control-sm ms-2"
+                  aria-controls="tickets-table"
+                  [(ngModel)]="name2"
+                  [ngModelOptions]="{standalone: true}"
+  
+              /></label>
+  
+          </div>
+          <div class="col-md-2">
+            <ng-multiselect-dropdown class="multiselect-dropdown"
+            [placeholder]="'Type 3'"
+            [settings]="dropdownType3Settings"
+            [data]="dropdownListType3"
+            [(ngModel)]="selectedItemsType3"
+            [ngModelOptions]="{standalone: true}"
+  
+            (onSelect)="onItemSelectType3($event)"
+            (onSelectAll)="onSelectAllType3($event)"
+          >
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="col-md-2">
+            <label class="d-inline-flex "
+                >Name3
+                <input
+                  type="text"
+                  name="searchTerm"
+                  class="form-control form-control-sm ms-2"
+                  aria-controls="tickets-table"
+                  [(ngModel)]="name3"
+                  [ngModelOptions]="{standalone: true}"
+  
+              /></label>
+  
+          </div>
+          <div class="col-md-2">
+            <ng-multiselect-dropdown class="multiselect-dropdown"
+            [placeholder]="'Type 4'"
+            [settings]="dropdownType4Settings"
+            [data]="dropdownListType4"
+            [(ngModel)]="selectedItemsType4"
+            [ngModelOptions]="{standalone: true}"
+  
+            (onSelect)="onItemSelectType4($event)"
+            (onSelectAll)="onSelectAllType4($event)"
+          >
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="col-md-2">
+            <label class="d-inline-flex "
+                >Name4
+                <input
+                  type="text"
+                  name="searchTerm"
+                  class="form-control form-control-sm ms-2"
+                  aria-controls="tickets-table"
+                  [(ngModel)]="name4"
+                  [ngModelOptions]="{standalone: true}"
+  
+              /></label>
+  
+          </div>
+          <div class="col-md-2">
+            <ng-multiselect-dropdown class="multiselect-dropdown"
+            [placeholder]="'Type 5'"
+            [settings]="dropdownType5Settings"
+            [data]="dropdownListType5"
+            [(ngModel)]="selectedItemsType5"
+            [ngModelOptions]="{standalone: true}"
+  
+            (onSelect)="onItemSelectType5($event)"
+            (onSelectAll)="onSelectAllType5($event)"
+          >
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="col-md-2">
+            <label class="d-inline-flex "
+                >Name5
+                <input
+                  type="text"
+                  name="searchTerm"
+                  class="form-control form-control-sm ms-2"
+                  aria-controls="tickets-table"
+                  [(ngModel)]="name5"
+                  [ngModelOptions]="{standalone: true}"
+  
+              /></label>
+  
+          </div>
+          
+          <div class="col-md-2">
+            <ng-multiselect-dropdown class="multiselect-dropdown"
+            [placeholder]="'Type 6'"
+            [settings]="dropdownType6Settings"
+            [data]="dropdownListType6"
+            [(ngModel)]="selectedItemsType6"
+            [ngModelOptions]="{standalone: true}"
+  
+            (onSelect)="onItemSelectType6($event)"
+            (onSelectAll)="onSelectAllType6($event)"
+          >
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="col-md-2">
+            <label class="d-inline-flex "
+                >Name6
+                <input
+                  type="text"
+                  name="searchTerm"
+                  class="form-control form-control-sm ms-2"
+                  aria-controls="tickets-table"
+                  [(ngModel)]="name6"
+                  [ngModelOptions]="{standalone: true}"
+  
+              /></label>
+  
+          </div>
+          <div class="col-md-2">
+            <ng-multiselect-dropdown class="multiselect-dropdown"
+            [placeholder]="'Type 7'"
+            [settings]="dropdownType7Settings"
+            [data]="dropdownListType7"
+            [(ngModel)]="selectedItemsType7"
+            [ngModelOptions]="{standalone: true}"
+  
+            (onSelect)="onItemSelectType7($event)"
+            (onSelectAll)="onSelectAllType7($event)"
+          >
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="col-md-2">
+            <label class="d-inline-flex "
+                >Name7
+                <input
+                  type="text"
+                  name="searchTerm"
+                  class="form-control form-control-sm ms-2"
+                  aria-controls="tickets-table"
+                  [(ngModel)]="name7"
+                  [ngModelOptions]="{standalone: true}"
+  
+              /></label>
+  
+          </div>
+          <div class="col-md-2">
+            <ng-multiselect-dropdown class="multiselect-dropdown"
+            [placeholder]="'Type 8'"
+            [settings]="dropdownType8Settings"
+            [data]="dropdownListType8"
+            [(ngModel)]="selectedItemsType8"
+            [ngModelOptions]="{standalone: true}"
+  
+            (onSelect)="onItemSelectType8($event)"
+            (onSelectAll)="onSelectAllType8($event)"
+          >
+          </ng-multiselect-dropdown>
+          </div>
+          <div class="col-md-2">
+            <label class="d-inline-flex "
+                >Name8
+                <input
+                  type="text"
+                  name="searchTerm"
+                  class="form-control form-control-sm ms-2"
+                  aria-controls="tickets-table"
+                  [(ngModel)]="name8"
+                  [ngModelOptions]="{standalone: true}"
+  
+              /></label>
+  
+          </div>
+          <div class="col-md-2">
+            <label class="d-inline-flex "
+                >Process
+                <input
+                  type="text"
+                  name="searchTerm"
+                  class="form-control form-control-sm ms-2"
+                  aria-controls="tickets-table"
+                  [(ngModel)]="process"
+              /></label>
+  
+          </div>
+          
+        </form>
+        
+        
+          
+                </div>
+              </div>
+  
+              <!-- End search -->
+              
+            </div>
+  
+            <!-- Table -->
+            <div class="table-responsive">
+              <table
+                class="table table-bordered "
+              >
+                <thead>
+                  <tr>
+                    <th sortable="name" >
+                      OpenNext
+                    </th>
+                    <th sortable="name" >
+                      Name
+                    </th>
+                  
+                    <th sortable="description" >
+                      Description
+                    </th>
+                    <th sortable="ta" >TA</th>
+                    <th sortable="ta_typ.id" >TA_TYP</th>
+                    <th sortable="type_0" >Type 0</th>
+                    <th sortable="type_1" >Type 1</th>
+                    <th sortable="name_1" >Name 1</th>
+                    <th sortable="type_2" >Type 2</th>
+                    <th sortable="name_2" >Name 2</th>
+                    <th sortable="type_3" >Type 3</th>
+                    <th sortable="name_3" >Name 3</th>
+                    <th sortable="type_4" >Type 4</th>
+                    <th sortable="name_4" >Name 4</th>
+                    <th sortable="type_5" >Type 5</th>
+                    <th sortable="name_5" >Name 5</th>
+                    <th sortable="type_6" >Type 6</th>
+                    <th sortable="name_6" >Name 6</th>
+                    <th sortable="type_7" >Type 7</th>
+                    <th sortable="name_7" >Name 7</th>
+                    <th sortable="type_8" >Type 8</th>
+                    <th sortable="name_8" >Name 8</th>
+                    
+                    <th sortable="level" >Level</th>
+                    <th sortable="mandant.groupname" >Mandant</th>
+                    <th sortable="mandant.mandantid" >Mandant Id</th>
+                    <th sortable="process" >Process</th>
+  
+                  </tr>
+                </thead>
+                <tbody *ngFor="let master of masterData
+                ">
+                  <tr>
+                    <td>
+                      <div *ngIf="master.level == 1">
+                        <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2=All&name_2=*">></a>
+                      </div>
+                      <div *ngIf="master.level == 2">
+                        <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2={{master.type2}}&name_2={{master.name2}}&type_3=All&name_3=*">></a>
+                      </div>
+                      <div *ngIf="master.level == 3">
+                        <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2={{master.type2}}&name_2={{master.name2}}&type_3={{master.type3}}&name_3={{master.name3}}&type_4=All&name_4=*">></a>
+                      </div>
+                      <div *ngIf="master.level == 4">
+                        <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2={{master.type2}}&name_2={{master.name2}}&type_3={{master.type3}}&name_3={{master.name3}}&type_4={{master.type4}}&name_4={{master.name4}}&type_5=All&name_5=*">></a>
+                      </div>
+                      <div *ngIf="master.level == 5">
+                        <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2={{master.type2}}&name_2={{master.name2}}&type_3={{master.type3}}&name_3={{master.name3}}&type_4={{master.type4}}&name_4={{master.name4}}&type_5={{master.type5}}&name_5={{master.name5}}&type_6=All&name_6=*">></a>
+                      </div>
+                      <div *ngIf="master.level == 6">
+                        <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2={{master.type2}}&name_2={{master.name2}}&type_3={{master.type3}}&name_3={{master.name3}}&type_4={{master.type4}}&name_4={{master.name4}}&type_5={{master.type5}}&name_5={{master.name5}}&type_6={{master.type6}}&name_6={{master.name6}}&type_7=All&name_7=*">></a>
+                      </div>
+                      <div *ngIf="master.level == 7">
+                        <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2={{master.type2}}&name_2={{master.name2}}&type_3={{master.type3}}&name_3={{master.name3}}&type_4={{master.type4}}&name_4={{master.name4}}&type_5={{master.type5}}&name_5={{master.name5}}&type_6={{master.type6}}&name_6={{master.name6}}&type_7={{master.type7}}&name_7={{master.name7}}&type_8=All&name_8=*">></a>
+                      </div>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.name"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.description"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.ta"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.tatyp.id"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.type0"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.type1"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.name1"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.type2"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.name2"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.type3"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.name3"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.type4"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.name4"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.type5"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.name5"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.type6"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.name6"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.type7"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.name7"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.type8"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.name8"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    
+                    <td>
+                      <ngb-highlight
+                        [result]="master.level"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.mandant.groupname"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.mandant.id"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="master.process"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                   
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- End table -->
+            <div
+              class="row justify-content-md-between align-masters-md-center mt-2"
+            >
+              <div class="col-sm-12 col-md-5">
+                <div
+                  class="dataTables_info mb-2"
+                  id="tickets-table_info"
+                  role="status"
+                  aria-live="polite"
+                ><label class="d-inline-flex ">
+                  Showing {{ ((page > 0 ? page : 1) - 1) * pageSize + 1 }} to
+                  {{
+                    ((page > 0 ? page : 0) - 1) * pageSize + masterData?.length
+                  }}
+                  of
+                  {{ totalRecords }}
+                  entries</label>
+                </div>
+              </div>
+              <!-- Pagination -->
+              <div class="col-sm-12 col-md-9 ">
+                <div
+                  class="dataTables_length float-md-end"
+                  id="clients-table_length"
+                  *ngIf="totalRecords > 10"
+                >
+                  <label class="d-inline-flex align-items-center ">
+                    Show
+                    <select
+                      name="clients-table_length"
+                      aria-controls="clients-table"
+                      name="pageSize"
+                      [(ngModel)]="pageSize"
+                      class="form-control form-control-sm mx-2"
+                      (change)="onPageSizeChange()"
+                    ><option [ngValue]="5">5</option>
+                      <option [ngValue]="10">10</option>
+                      <option [ngValue]="25" *ngIf="totalRecords > 25">25</option>
+                      <option [ngValue]="50" *ngIf="totalRecords > 50">
+                        50
+                      </option>
+                      <option [ngValue]="100" *ngIf="totalRecords > 100">
+                        100
+                      </option>
+                    </select>
+                    entries</label
+                  >
+                </div>
+                <div class="text-md-right float-md-end pagination-rounded">
+                  <ngb-pagination
+                    [(collectionSize)]="totalRecords"
+                    [(page)]="page"
+                    [(pageSize)]="pageSize"
+                    (pageChange)="onPageChange()"
+                    [boundaryLinks]="true"
+                    [maxSize]="5"
+                    [rotate]="true"
+                  >
+                  </ngb-pagination>
+                </div>
+              </div>
+              <!-- End Pagination -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+
+
+   
+<ng-template #jobModalCreate let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title mt-0">{{ mode }} job</h5>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="modal.dismiss('Cross click')"
+      aria-hidden="true"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">ID *</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="ID"
+              type="text"
+              [(ngModel)]="selectedJob.id" 
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label"> Name *</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="name"
+              type="text"
+              [(ngModel)]="selectedJob.jobId.name" 
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Status</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="status"
+              type="text"
+              [(ngModel)]="selectedJob.status"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Mandant *</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="mandant"
+              type="text"
+              [(ngModel)]="selectedJob.jobId.mandant" 
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">User *</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="grafana_user"
+              type="text"
+              [(ngModel)]="selectedJob.jobId.grafana_user" 
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Directory</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="ftp_directory"
+              type="text"
+              [(ngModel)]="selectedJob.ftpdirectory"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">SFTP Connection</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="sftp_con"
+              type="text"
+              [(ngModel)]="selectedJob.sftpcon"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">User email</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="email"
+              type="text"
+              [(ngModel)]="selectedJob.email"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Result per Email</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="email_result_file"
+              type="text"
+              [(ngModel)]="selectedJob.emailresultfile"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">File Size limit per Email</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="file_size_limit"
+              type="text"
+              [(ngModel)]="selectedJob.maxfilesize"
+            />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label class="col-md-3 col-form-label">Date relativ (True/False) Darf nicht leer sein</label>
+          <div class="col-md-9">
+            <input
+              class="form-control"
+              name="date_relativ"
+              type="text"
+              [(ngModel)]="selectedJob.daterelativ"
+            />
+          </div>
+        </div>
+        <div *ngIf="mode==='Edit'">
+          <div class="row mb-12">
+            <label class="col-md-3 col-form-label">Alle Felder mit * dürfen nicht geändert werden</label>
+           
+          </div>
+
+        </div>
+        <div *ngIf="mode==='Create'">
+          <div class="row mb-12">
+            <label class="col-md-3 col-form-label">Alle Felder mit * dürfen nicht leer sein</label>
+           
+          </div>
+
+        </div>
+        
+       
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="CreateJob(jobModalCreate)"
+    >
+      Save changes
+    </button>
+  </div>
+</ng-template>
+  

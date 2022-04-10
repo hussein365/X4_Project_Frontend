@@ -6,11 +6,11 @@ import { NgbPaginationModule, NgbTypeaheadModule, NgbDropdownModule } from '@ng-
 
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { UIModule } from 'src/app/shared/ui/ui.module';
-import { MasterdataTreeComponent } from './masterdata-tree.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { Archive12Component } from './archive12.component';
 
 @NgModule({
-  declarations: [MasterdataTreeComponent],
+  declarations: [Archive12Component],
   imports: [
     CommonModule,
     UIModule,
@@ -21,6 +21,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FormsModule,
     NgMultiSelectDropDownModule.forRoot(),
 
+
   ]
 })
-export class MasterdataTreeModule { }
+export class Archive12Module { }

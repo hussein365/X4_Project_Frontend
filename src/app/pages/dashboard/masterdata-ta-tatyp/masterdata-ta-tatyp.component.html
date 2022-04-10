@@ -15,6 +15,9 @@
                 id="tickets-table_filter"
                 class="dataTables_filter text-md-left"
               >
+              <form class="row g-3">
+                <div class="col-md-3">
+
                 <label class="d-inline-flex align-masters-center"
                   >Liste TA with comma
                   <input
@@ -22,8 +25,11 @@
                     name="searchTerm"
                     class="form-control form-control-sm ms-2"
                     aria-controls="tickets-table"
-                    [(ngModel)]="searchTerm"
+                    [(ngModel)]="ta"
                 /></label>
+                </div>
+                <div class="col-md-3">
+
                 <label class="d-inline-flex "
                 >Range TA from
                 <input
@@ -31,8 +37,11 @@
                   name="searchTerm"
                   class="form-control form-control-sm ms-2"
                   aria-controls="tickets-table"
-                  [(ngModel)]="searchTerm"
+                  [(ngModel)]="from"
               /></label>
+              </div>
+              <div class="col-md-3">
+
               <label class="d-inline-flex "
               >Range TA until
               <input
@@ -40,12 +49,16 @@
                 name="searchTerm"
                 class="form-control form-control-sm ms-2"
                 aria-controls="tickets-table"
-                [(ngModel)]="searchTerm"
+                [(ngModel)]="until"
             /></label>
-            <button type="button" class="btn btn-info waves-effect waves-light  " (click)="method()">Submit</button>
-            
-            <div class=" align-masters-center">
-            <ng-multiselect-dropdown
+            </div>
+            <div class="col-md-3 ">
+
+              <button type="button" class="btn btn-info waves-effect waves-light bouton " (click)="method()">Submit</button>
+               </div>
+              <div class="col-md-12">
+
+            <ng-multiselect-dropdown class="multiselect-dropdown"
             [placeholder]="'select TA_TYP'"
             [settings]="dropdownSettings"
             [data]="dropdownList"
@@ -54,7 +67,9 @@
             (onSelectAll)="onSelectAll($event)"
           >
           </ng-multiselect-dropdown>
+         
         </div>
+        </form>
         
               </div>
             </div>
@@ -70,6 +85,9 @@
             >
               <thead>
                 <tr>
+                  <th sortable="name" >
+                    OpenNext
+                  </th>
                   <th sortable="name" >
                     Name
                   </th>
@@ -108,6 +126,29 @@
               ">
                 <tr>
                   <td>
+                    <div *ngIf="master.level == 1">
+                      <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2=All&name_2=*">></a>
+                    </div>
+                    <div *ngIf="master.level == 2">
+                      <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2={{master.type2}}&name_2={{master.name2}}&type_3=All&name_3=*">></a>
+                    </div>
+                    <div *ngIf="master.level == 3">
+                      <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2={{master.type2}}&name_2={{master.name2}}&type_3={{master.type3}}&name_3={{master.name3}}&type_4=All&name_4=*">></a>
+                    </div>
+                    <div *ngIf="master.level == 4">
+                      <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2={{master.type2}}&name_2={{master.name2}}&type_3={{master.type3}}&name_3={{master.name3}}&type_4={{master.type4}}&name_4={{master.name4}}&type_5=All&name_5=*">></a>
+                    </div>
+                    <div *ngIf="master.level == 5">
+                      <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2={{master.type2}}&name_2={{master.name2}}&type_3={{master.type3}}&name_3={{master.name3}}&type_4={{master.type4}}&name_4={{master.name4}}&type_5={{master.type5}}&name_5={{master.name5}}&type_6=All&name_6=*">></a>
+                    </div>
+                    <div *ngIf="master.level == 6">
+                      <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2={{master.type2}}&name_2={{master.name2}}&type_3={{master.type3}}&name_3={{master.name3}}&type_4={{master.type4}}&name_4={{master.name4}}&type_5={{master.type5}}&name_5={{master.name5}}&type_6={{master.type6}}&name_6={{master.name6}}&type_7=All&name_7=*">></a>
+                    </div>
+                    <div *ngIf="master.level == 7">
+                      <a  href="/tree?oid={{master.oid}}&type_0={{master.type0}}&type_1={{master.type1}}&name_1={{master.name1}}&type_2={{master.type2}}&name_2={{master.name2}}&type_3={{master.type3}}&name_3={{master.name3}}&type_4={{master.type4}}&name_4={{master.name4}}&type_5={{master.type5}}&name_5={{master.name5}}&type_6={{master.type6}}&name_6={{master.name6}}&type_7={{master.type7}}&name_7={{master.name7}}&type_8=All&name_8=*">></a>
+                    </div>
+                  </td>
+                  <td>
                     <ngb-highlight
                       [result]="master.name"
                       [term]="searchTerm"
@@ -127,109 +168,109 @@
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.tatyp.name"
+                      [result]="master.tatyp.id"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.type_0"
+                      [result]="master.type0"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.type_1"
+                      [result]="master.type1"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.name_1"
+                      [result]="master.name1"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.type_2"
+                      [result]="master.type2"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.name_2"
+                      [result]="master.name2"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.type_3"
+                      [result]="master.type3"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.name_3"
+                      [result]="master.name3"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.type_4"
+                      [result]="master.type4"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.name_4"
+                      [result]="master.name4"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.type_5"
+                      [result]="master.type5"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.name_5"
+                      [result]="master.name5"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.type_6"
+                      [result]="master.type6"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.name_6"
+                      [result]="master.name6"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.type_7"
+                      [result]="master.type7"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.name_7"
+                      [result]="master.name7"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.type_8"
+                      [result]="master.type8"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>
                   <td>
                     <ngb-highlight
-                      [result]="master.name_8"
+                      [result]="master.name8"
                       [term]="searchTerm"
                     ></ngb-highlight>
                   </td>

@@ -9,7 +9,6 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ClientModule } from './clients/client.module';
 import { UIModule } from '../shared/ui/ui.module';
-
 import { Archive11Component } from './dashboard/archive11/archive11.component';
 import { Archive12Component } from './dashboard/archive12/archive12.component';
 import { Archive13Component } from './dashboard/archive13/archive13.component';
@@ -24,6 +23,10 @@ import { MasterDataComponent } from './dashboard/HelloWorld/MasterData.component
 import { DataService } from '../core/services/data.service';
 import { MasterdataTaTatypModule } from './dashboard/masterdata-ta-tatyp/masterdata-ta-tatayp.module';
 import { MasterdataTreeModule } from './dashboard/masterdata-tree/masterdata-tree.module';
+import { AppRoutingModule } from '../app-routing.module';
+import { BatchjobArchiveModule } from './dashboard/batchjob_archive/batchjob_archive.module';
+import { JobParamModule } from './dashboard/jobparam/jobparam.module';
+import { Archive12Module } from './dashboard/archive12/archive12.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -31,9 +34,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 };
 
 @NgModule({
-  declarations: [Archive11Component,Archive12Component,
-                 Archive13Component,Archive14Component,Archive16Component,Archive18Component,
-                 BatchjobArchiveComponent,BatchjobBeproNeuComponent,BatchjobSettingsComponent],
+  declarations: [Archive11Component,
+                 Archive13Component,Archive14Component,Archive16Component,Archive18Component
+                 ,BatchjobBeproNeuComponent,BatchjobSettingsComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,
@@ -44,7 +47,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MultiSelectModule,
     TableModule,
     MasterdataTaTatypModule,
-    MasterdataTreeModule
+    MasterdataTreeModule,
+    BatchjobArchiveModule,
+    JobParamModule,
+    Archive12Module
   ],
   providers: [
     {

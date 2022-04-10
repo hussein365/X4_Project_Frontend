@@ -56,60 +56,60 @@ export class Masterdata {
 	dmt: string;
 
 
-	type_0: string;
+	type0: string;
 
 
-	type_1: string;
+	type1: string;
 
-	name_1: string;
-
-
-	type_2: string;
-
-	name_2: string;
+	name1: string;
 
 
-	type_3: string;
+	type2: string;
+
+	name2: string;
 
 
-	name_3: string;
+	type3: string;
 
 
-	type_4: string;
+	name3: string;
 
 
-	name_4: string;
+	type4: string;
 
 
-	type_5: string;
+	name4: string;
 
 
-	name_5: string;
-
-	type_6: string;
-
-	name_6: string;
+	type5: string;
 
 
-	type_7: string;
+	name5: string;
+
+	type6: string;
+
+	name6: string;
 
 
-	name_7: string;
+	type7: string;
 
 
-	type_8: string;
-
-	name_8: string;
-
-	type_9: string;
-	name_9: string;
-
-	type_10: string;
-
-	name_10: string;
+	name7: string;
 
 
-	ta_typ: Ta_typ;
+	type8: string;
+
+	name8: string;
+
+	type9: string;
+	name9: string;
+
+	type10: string;
+
+	name10: string;
+
+
+	tatyp: Ta_typ;
 
 	ta: number;
 

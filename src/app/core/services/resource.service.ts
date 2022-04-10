@@ -9,7 +9,7 @@ const apiHost: string = environment.apiHost;
 
 export class ResourceService<T extends Resource> {
   constructor(
-      private httpClient: HttpClient,
+      public httpClient: HttpClient,
       private endpoint: string) {}
 
     public create(item: T): Observable<T> {

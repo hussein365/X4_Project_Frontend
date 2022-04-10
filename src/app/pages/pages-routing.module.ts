@@ -15,6 +15,8 @@ import { BatchjobSettingsComponent } from './dashboard/batchjob_settings/batchjo
 import { BatchjobBeproNeuComponent } from './dashboard/batchjob_bepro_neu/batchjob_bepro_neu.component';
 import { BatchjobArchiveComponent } from './dashboard/batchjob_archive/batchjob_archive.component';
 import { MasterDataComponent } from './dashboard/HelloWorld/MasterData.component';
+import { JobParamComponent } from './dashboard/jobparam/jobparam.component';
+import { BatchjobParameterComponent } from './dashboard/batchjob_parameter/batchjob_parameter.component';
 
 
 const routes: Routes = [
@@ -24,7 +26,7 @@ const routes: Routes = [
   { path: 'tree_ta_typ_ta', component: MasterdataTaTatypComponent },
   { path: 'tree', component: MasterdataTreeComponent },
   { path: 'archive11', component: Archive11Component },
-  { path: 'archive12', component: Archive12Component },
+  { path: 'archive12/:level', component: Archive12Component },
   { path: 'archive13', component: Archive13Component },
   { path: 'archive14', component: Archive14Component },
   { path: 'archive16', component: Archive16Component },
@@ -32,7 +34,12 @@ const routes: Routes = [
   { path: 'batchjob_archive', component: BatchjobArchiveComponent },
   { path: 'batchjob_bepro_neu', component: BatchjobBeproNeuComponent },
   { path: 'batchjob_settings', component: BatchjobSettingsComponent },
-  { path: 'helloworld', component: MasterDataComponent }
+  { path: 'helloworld', component: MasterDataComponent },
+  { path: 'tree/:level', component: MasterdataTreeComponent },
+  { path:'jobparams', component:JobParamComponent },
+  {path: 'batchjob_parameter', component:BatchjobParameterComponent }
+
+
 
 
 

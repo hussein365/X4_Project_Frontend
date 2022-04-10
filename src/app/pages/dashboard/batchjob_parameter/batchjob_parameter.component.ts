@@ -32,15 +32,15 @@ import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 
 @Component({
   selector: 'app-masterdatatable',
-  templateUrl: './batchjob_archive.component.html',
-  styleUrls: ['./batchjob_archive.component.scss'],
+  templateUrl: './batchjob_parameter.component.html',
+  styleUrls: ['./batchjob_parameter.component.scss'],
   providers: [DecimalPipe],
 })
 
 /**
  * masterdata component
  */
-export class BatchjobArchiveComponent implements OnInit {
+export class BatchjobParameterComponent implements OnInit {
 
   ta_typs: Ta_typ[];
   selectedTa_typs: Ta_typ[];

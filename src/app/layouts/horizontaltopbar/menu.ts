@@ -21,7 +21,7 @@ export const MENU: MenuItem[] = [
       {
         i3: 4,
         label: 'Masterdata with tree ',
-        link: '/tree',
+        link: '/tree/All',
         parentI2: 2,
       },
     ],
@@ -40,7 +40,7 @@ export const MENU: MenuItem[] = [
       {
         id: 7,
         label: 'Archive-12',
-        link: '/archive12',
+        link: '/archive12/All',
         parentId: 5,
       },
       {
@@ -82,18 +82,24 @@ export const MENU: MenuItem[] = [
       },
       {
         i3: 14,
+        label: 'Batchjob Parameter',
+        link: '/batchjob_parameter',
+        parentI2: 12,
+      },
+      {
+        i3: 15    ,
         label: 'Batchjob(Bepro) Neu',
         link: '/batchjob_bepro_neu',
         parentI2: 12,
       },
       {
-        i3: 15,
+        i3: 16,
         label: 'Batchjob Settings',
         link: '/batchjob_settings',
         parentI2: 12,
       },
       {
-        i3: 16,
+        i3: 17,
         label: 'helloworld',
         link: '/helloworld',
         parentI2: 12,

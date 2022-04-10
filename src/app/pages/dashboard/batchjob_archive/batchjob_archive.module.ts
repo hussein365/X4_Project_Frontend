@@ -6,11 +6,12 @@ import { NgbPaginationModule, NgbTypeaheadModule, NgbDropdownModule } from '@ng-
 
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { UIModule } from 'src/app/shared/ui/ui.module';
-import { MasterdataTreeComponent } from './masterdata-tree.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { BatchjobArchiveComponent } from './batchjob_archive.component';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
-  declarations: [MasterdataTreeComponent],
+  declarations: [BatchjobArchiveComponent],
   imports: [
     CommonModule,
     UIModule,
@@ -20,7 +21,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NgbDropdownModule,
     FormsModule,
     NgMultiSelectDropDownModule.forRoot(),
+    RadioButtonModule
 
   ]
 })
-export class MasterdataTreeModule { }
+export class BatchjobArchiveModule { }

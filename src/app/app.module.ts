@@ -10,6 +10,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LayoutsModule } from './layouts/layouts.module';
 import { DataService } from './core/services/data.service';
+import { RadioButtonModule } from 'primeng/radiobutton';
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
